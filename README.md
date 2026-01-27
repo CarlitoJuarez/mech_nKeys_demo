@@ -13,6 +13,3 @@ This is the demo version of the mech_nKeys website.
 3. Setup env
 4. Migrate + Seed
 5. Start ASGI ( Daphne )
-
-
->>>>>>> 85b49d6 (Initial demo repo)
