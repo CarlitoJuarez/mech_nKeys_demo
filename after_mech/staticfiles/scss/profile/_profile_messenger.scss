@@ -1,0 +1,164 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+#messenger_div {
+  z-index: 3;
+  position: fixed;
+  width: 80%;
+  height: 70%;
+  top: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  // left: -80%;
+  left: 10%;
+  padding: 1.4rem;
+  border-radius: 10px;
+  background-color: rgba(140, 140, 140, .2);
+  backdrop-filter: blur(10px);
+  transition: left .4s ease;
+}
+
+.messenger_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  max-width: 60rem;
+  height: fit-content;
+  white-space: nowrap;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-top: 5px;
+}
+
+.last_one_user {
+  margin: 0 1rem;
+  width: 6rem;
+}
+
+.last_one_div {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60vw;
+  white-space: nowrap;
+  overflow-x: hidden;
+  font-size: 16px;
+  margin-left: 1rem;
+}
+
+// .last_one_div_2 {
+//   position: relative;
+//   display: flex;
+//   justify-content: start;
+//   align-items: end;
+//   width: 100%;
+//   white-space: nowrap;
+//   overflow-x: hidden;
+//
+// }
+
+.last_one_date {
+  position: relative;
+  font-size: 12px;
+  padding-left: 1rem;
+}
+
+.last_one_preview {
+  position: relative;
+  width: 80%;
+  max-width: fit-content;
+  overflow-x: hidden;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(220, 200, 240, 0.8);
+
+}
+
+.message_profile_btn {
+  position: relative;
+  margin: .4rem;
+  > img {
+    position: relative;
+    left: 0;
+    transition: left .4s ease;
+  }
+  &:hover {
+    > img {
+      left: 4px;
+    }
+  }
+}
+
+.own_message {
+  > :first-child{
+    background: rgba(210, 240, 220, .8);
+  }
+}
+
+.active_board {
+  left: 10% !important;
+}
+
+.inactive_board {
+  left: -80% !important;
+}
+
+
+
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  padding: 1px;
+  border-radius: 9px;
+  font: 700 11px/18px system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  text-align: center;
+  background: #e02424; /* red */
+  color: #fff;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.15);
+}
+.messenger_wrapper .message_profile_btn { position: relative; }
+.messenger_wrapper .message_profile_btn .badge {
+  top: -6px; right: -6px;
+}
+
+.inline_badge {
+  z-index: 200;
+  top: .6rem;
+  right: 1.6rem;
+  position: absolute;
+}
+
+.user_badge {
+  top: -10px;
+  right: -14px;
+}
+
+.mute_chat_btn {
+  overflow: hidden;
+  background: transparent;
+  border:none;
+  position: relative;
+  top: -10px;
+
+  > img {
+    height: 20px;
+  }
+}
+
+
+
+
+
+
+
+
+
+

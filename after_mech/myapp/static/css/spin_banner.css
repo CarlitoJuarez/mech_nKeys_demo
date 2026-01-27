@@ -1,0 +1,19 @@
+:root{
+--size: 320px;
+--radius: calc(var(--size) / 2.6);
+--spin-duration: 800ms;
+--pause: 1400ms;
+}
+.spin-banner{display:grid;place-items:center;width:100%;padding:2rem 0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.viewport{position:relative;width:var(--size);height:var(--size);border-radius:50%;isolation:isolate}
+.viewport::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(transparent 58%,rgba(0,0,0,.08) 60% 65%,transparent 67%),conic-gradient(from 0deg,rgba(0,0,0,.06),rgba(0,0,0,.02),rgba(0,0,0,.06));pointer-events:none}
+.wheel{position:absolute;inset:0;display:block;transform:rotate(var(--rot,0deg));transition:transform var(--spin-duration) cubic-bezier(.22,.9,.35,1);will-change:transform}
+.item{--angle:calc(var(--i) * 1deg);position:absolute;left:50%;top:50%;transform:rotate(var(--angle)) translate(var(--radius)) rotate(calc(var(--angle) * -1));transform-origin:center;white-space:nowrap;display:inline-flex;align-items:center;gap:.5ch;padding:.55rem .8rem;border-radius:999px;border:1px solid rgba(0,0,0,.12);background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.08);font-weight:600;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
+.item:hover{box-shadow:0 10px 26px rgba(0,0,0,.12)}
+.item:focus-visible{outline:2px solid #0a84ff;outline-offset:2px}
+.item.is-active{box-shadow:0 12px 32px rgba(0,0,0,.18);transform:rotate(var(--angle)) translate(calc(var(--radius) + 4px)) rotate(calc(var(--angle) * -1))}
+.indicator{position:absolute;left:50%;top:0;translate:-50% -15%;z-index:2;background:#111;color:#fff;font:700 12px/1 system-ui,sans-serif;padding:.35rem .5rem;border-radius:6px;box-shadow:0 6px 20px rgba(0,0,0,.25);user-select:none}
+.indicator::after{content:"";position:absolute;left:50%;top:100%;translate:-50% 0;border:6px solid transparent;border-top-color:#111}
+.controls{margin-top:1rem;display:flex;gap:.5rem;justify-content:center}
+.controls button{padding:.5rem .8rem;border-radius:10px;border:1px solid rgba(0,0,0,.12);background:#fff;cursor:pointer;font-weight:600}
+@media (prefers-reduced-motion:reduce){.wheel{transition-duration:0ms}}

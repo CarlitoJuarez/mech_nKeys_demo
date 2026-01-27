@@ -1,0 +1,17 @@
+{% extends "myapp/layout.html" %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'vue/assets/main.css' %}">
+  <!-- <script type="module" src="http://localhost:5173/src/main"></script> -->
+  <script type="module" src="{% static 'vue/assets/main.js' %}"></script>
+  <script type="module" src="{% static 'js/home/header.js' %}"></script>
+
+{% endblock %}
+
+{% block body %}
+<div id="settings_wrapper">
+  <div id="settings-app" style="margin-bottom: 20vh;">
+  </div>
+</div>
+{% endblock %}

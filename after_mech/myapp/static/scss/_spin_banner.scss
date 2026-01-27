@@ -1,0 +1,94 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.banner {
+  z-index: 100;
+  position: fixed;
+  top: .4vh;
+  left: .4rem;
+  width: 12vw;
+  height: 3rem;
+  overflow: hidden;
+  border: none;
+  border-radius: .5rem;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  touch-action: pan-x;
+  font-size: 14px;
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0px,
+    rgba(0,0,0,0.3) 8px,
+    black 24px,
+    black calc(100% - 24px),
+    rgba(0,0,0,0.3) calc(100% - 8px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0px,
+    rgba(0,0,0,0.3) 8px,
+    black 24px,
+    black calc(100% - 24px),
+    rgba(0,0,0,0.3) calc(100% - 8px),
+    transparent 100%
+  );
+
+}
+.track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.banner-item {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: .5rem;
+  padding: 0 .75rem;
+  flex: 0 0 auto;
+}
+
+.banner-item button {
+  position: relative;
+  width: fit-content;
+  outline: none;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 300;
+  border-radius: 4px;
+  padding: .25rem .55rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 220%;
+    height: 220%;
+
+    transform: translate(-50%, -50%) rotate(0deg);
+    transform-origin: center;
+
+    background: linear-gradient(140deg, #FF6B01, #F5B200);
+    z-index: -1;
+
+    transition: transform .2s ease;
+  }
+  &:hover::before{
+    transform: translate(-50%, -50%) rotate(180deg);
+  }
+}
+.banner-item img { z-index: 3; width: 1rem; height: 1rem; }
+

@@ -1,0 +1,141 @@
+@use '../variables' as *;
+
+#feed_bar {
+  z-index: 99;
+  display: flex;
+  position: fixed;
+  width: 98vw;
+  height: 2.6rem;
+  padding: .2rem;
+  // padding-right: 1rem;
+  top: .4rem;
+  justify-content: center;
+  align-items: center;
+  bottom: .5px;
+  font-size: 16px;
+  border-radius: 20px;
+  transition: all .4s ease;
+  gap: .2rem;
+  opacity: 0;
+  > a {
+    cursor: pointer;
+    border-radius: 10px;
+    width: 28vw;
+    max-width: 20.9rem;
+    height: 90%;
+    color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background .2s ease;
+    transition: box-shadow .2s ease;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+
+    > :first-child {
+      border-radius: 10px;
+      position: absolute;
+      background: $background_dark;
+      height: 100%;
+      width: 100%;
+      transition: left .3s ease-in-out;
+      // border: dashed #AFE963 1px;
+    }
+  }
+  > a > img {
+    z-index: 5;
+    height: 1rem;
+  }
+}
+
+// #feed_bar::before,
+// #feed_bar::after {
+  // position: absolute;
+  // left: 1rem;
+  // right: 1rem;
+  // height: 1px;
+  // background:
+    // radial-gradient(circle at 0% 50%, rgba(255,255,255,0.0), rgba(255,255,255,0.5), rgba(255,255,255,0.0)),
+    // linear-gradient(to right, rgba(255,255,255,0.15), rgba(255,255,255,0.9), rgba(255,255,255,0.15));
+  // box-shadow: 0 0 8px rgba(255,255,255,0.7);
+// }
+
+// #feed_bar::before {
+//   top: 0;
+// }
+
+#feed_bar::after {
+  bottom: -.3rem;
+}
+
+
+
+.keyboard_swap_has {
+  left: 0 !important;
+}
+
+.keyboard_swap_hasnot {
+  left: 40vw !important;
+}
+
+.market_swap {
+  left: 0;
+}
+
+.keyboard_swap {
+  left: 0;
+}
+
+.market_swap_has {
+  left: 0 !important;
+}
+
+.market_swap_hasnot {
+  left: -40vw !important;
+}
+
+#exit_btn {
+  z-index: 100;
+  top: 4rem;
+  > img {
+    rotate: 45deg;
+  }
+}
+
+
+// keep orig for exit maybe
+#add_post_btn {
+  z-index: 9;
+  position: fixed;
+  top: 2.6rem;
+
+  > div {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease;
+    height: 100%;
+    width: 100%;
+    background: $background_nav_1;
+  }
+}
+
+.user_profile_btn {
+  position: relative;
+  left: 3rem;
+  > img {
+    height: .9rem !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+

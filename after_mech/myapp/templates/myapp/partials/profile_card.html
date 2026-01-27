@@ -1,0 +1,39 @@
+
+{% load static %}
+
+
+<div class="search_profile_wrapper" id="search_profile-{{ profile.id }}">
+  <label class="profile_picture_stack">
+    {% if profile.picture %}
+      <img class="search_profile_picture" src="{{ profile.picture.url }}" alt="{{ profile.user.username }}">
+    {% else %}
+      <img src="{% static 'imgs/friends_b.png' %}" alt="default profile_picture">
+    {% endif %}
+  </label>
+
+  <button class="search_profile_btn post_btn" value="{{ profile.user.username }}">
+    {{ profile.user.username }}
+  </button>
+
+  <div class="profile_card_info">
+    <p class="search_profile_stat"><span style="font-weight:700" >Followers: </span>{{ profile.followers.count }}</p>
+    <p class="search_profile_stat"><span style="font-weight:700" >Following: </span>{{ profile.following.count }}</p>
+    <p class="search_profile_stat"><span style="font-weight:700" >Posts: </span>{{ profile.user.posts.count }}</p>
+    <p class="search_profile_stat">{{ profile.user.date_joined|date:"M j, Y" }}</p>
+  </div>
+</div>
+
+<script type="module" src="{% static 'js/home/profile_btn.js' %}"></script>
+<!--<script>-->
+<!--(() => {-->
+<!--  const root = document.getElementById('search_profile-{{ profile.id }}');-->
+<!--  if (!root) return ;-->
+<!--  const profileBtn = root.querySelector('.search_profile_btn');-->
+<!--  if (!profileBtn) return ;-->
+<!---->
+<!--  profileBtn.addEventListener('click', function () {-->
+<!--    this.style.opacity = '0';-->
+<!--    setTimeout(() => window.location.href = `/myapp/profile/${this.value}`, 200);-->
+<!--  });-->
+<!--})-->
+<!--</script>-->

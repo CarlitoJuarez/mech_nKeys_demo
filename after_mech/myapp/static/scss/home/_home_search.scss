@@ -1,0 +1,143 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+#search_div {
+  z-index: 201;
+  position: fixed;
+  width: 6rem;
+  height: 70%;
+  top: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: -4rem;
+  border-radius: 0px 10px 10px 0;
+  background-color: rgba(240, 240, 240, .4);
+  backdrop-filter: blur(10px);
+  transition: left .4s ease;
+}
+
+#search_input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10%;
+  width: 33%;
+  height: 100%;
+}
+
+#search_info {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 67%;
+  height: 100%;
+}
+
+.search_label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 48px;
+  border-radius: 20px;
+  background: rgba(140, 140, 140, .4);
+  opacity: 1;
+  transition: background .4s ease;
+  transition: opacity .4s ease;
+  > label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    cursor: pointer;
+    > img {
+      width: 21px;
+    }
+    &:hover {
+      background: $background_dark;
+    }
+  }
+  > input {
+    text-align: right;
+    transition: opacity .4s ease;
+    width: 3.8rem;
+    position: absolute;
+    left: -4rem;
+    top: 30%;
+    background: transparent;
+    border-radius: 8px;
+    border: none;
+    color: $darkGray;
+    font-size: 14px;
+  }
+  &:hover {
+    background: $background_dark;
+  }
+}
+
+#product_div {
+  top: .4rem;
+}
+
+#brand_div {
+  top: 3.4rem;
+}
+
+#category_div {
+  top: 6.4rem;
+}
+
+#search_category {
+  position: relative;
+  width: 3.4rem;
+  border: none;
+  border-radius: 10px;
+  background: rgba(140, 140, 140, .4);
+  left: -2.8rem;
+  color: $white;
+  font-size: 14px;
+}
+
+#category_label {
+  position: inherit;
+}
+
+.category_specific_div {
+  top: 9.4rem;
+}
+
+.search_category_specific {
+  position: relative;
+  width: 3.4rem;
+  border: none;
+  border-radius: 10px;
+  background: rgba(140, 140, 140, .4);
+  left: -2.8rem;
+  color: $white;
+  font-size: 14px;
+}
+
+.category_specific_label {
+  position: inherit;
+}
+
+#for_sale_div {
+  top: 9.4rem;
+}
+
+
+#profile_div_sidebar {
+  bottom: .4rem;
+}
+
+
+
+

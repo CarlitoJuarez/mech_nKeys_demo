@@ -1,0 +1,22 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.profiles_board {
+  z-index: 3;
+  position: fixed;
+  width: 80%;
+  height: 70%;
+  top: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  // left: -80%;
+  left: 10%;
+  padding: 1.4rem;
+  border-radius: 10px;
+  background-color: rgba(140, 140, 140, .2);
+  backdrop-filter: blur(10px);
+  transition: left .4s ease;
+  overflow: hidden;
+}

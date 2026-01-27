@@ -1,0 +1,10 @@
+.env
+venv/
+.venv/
+after_mech/venv/
+after_mech/.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*/.venv/
+*/venv/

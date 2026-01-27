@@ -1,0 +1,127 @@
+{% load static %}
+<script type="module" src="{% static 'js/home/add_post.js' %}"></script>
+
+<div id="add_post_dev_info" class="" style="display:none;"></div>
+
+
+<div id="img_wrapper" class="move_out">
+  <div id="add_post_img">
+    <label id="add_img_btn" class="small_btn plus_button plus_label">
+        <img class="plus_img" src="{% static 'imgs/plus.png' %}">
+        <input id="files_id" name="images" class="image_input" type="file" multiple required style="display:none;">
+    </label>
+    <label class="img_warning hide">
+      NOTE: only 9 pictures alowed.
+    </label>
+    <!-- <button type="button" class="prev" style="display: none;"></button>
+    <button type="button" class="next" style="display: none;"></button> -->
+    <button type="button" id="add_post_prev_img" class="prev_button">
+        <img style="position: absolute; width: 3rem; top: 42%; left: -13px; border-radius: 20px" src="{% static 'imgs/post_arrow.png' %}">
+    </button>
+    <button type="button" id="add_post_next_img" class="next_button">
+        <img style="position: absolute; width: 3rem; top: 42%; right: -3px; border-radius: 20px;" src="{% static 'imgs/arrow_right.png' %}">
+    </button>
+    <img id="add_post_bin" class='hide' src="{% static 'imgs/bin.png' %}">
+    <div id="slide_show">
+    </div>
+  </div>
+</div>
+<div id="info_wrapper" class="move_out">
+  <div id="add_post_info">
+    <div id='clear_div'>
+      <button id='clear_btn' class='delete_btn post_btn'>CLEAR</button>
+    </div>
+    <div class="info_table">
+      <div class="info_product">
+          <input class="info_product_item create_name mandatory" type="text" name="name" id="product_name" placeholder="___" maxlength="20">
+          <input class="info_product_item create_brand mandatory" type="text" name="brand" id="brand" placeholder="___" maxlength="20">
+
+          <select class="create_category info_product_item select_item mandatory" name="category">
+              <option selected value="None"></option>
+              {% for value, label in categories %}
+                  <option value="{{ value }}">{{ label }}</option>
+              {% endfor %}
+          </select>
+
+          <!-- KEYBOARD -->
+          <select class="create_layout info_product_item select_item mandatory hide" name="layout">
+              <option selected value="None"></option>
+              {% for value, label in layouts %}
+                  <option value="{{ value }}">{{ label }}</option>
+              {% endfor %}
+          </select>
+
+          <!-- SWITCHES -->
+          <select class="create_switch_type info_product_item select_item mandatory hide" name="switch_type">
+              <option selected value="None"></option>
+              {% for value, label in switch_type %}
+                  <option value="{{ value }}">{{ label }}</option>
+              {% endfor %}
+          </select>
+
+          <!-- KEYCAPS -->
+          <select class="create_cap_material info_product_item select_item mandatory hide" name="cap_material">
+              <option selected value="None"></option>
+              {% for value, label in cap_material %}
+                  <option value="{{ value }}">{{ label }}</option>
+              {% endfor %}
+          </select>
+
+
+          <!-- SWITCHES -->
+          <input id="switch_amount" class="info_product_item create_switch_amount number_input hide" type="number" max="999" min="10" step="1.0" name="price" placeholder="___">
+
+
+          <!-- COLOR -->
+          <input class="info_product_item create_color mandatory hide" type="text" name="color" id="color" placeholder="___" maxlength="20">
+
+          <!-- KEYBOARD -->
+          <input class="info_product_item create_switches hide" type="text" name="switches" id="switches" placeholder="___" maxlength="20">
+          <input class="info_product_item create_keycaps hide" type="text" name="keycaps" id="keycaps" placeholder="___" maxlength="20">
+          <input class="info_product_item create_m_style hide" type="text" name="m_style" id="m_style" placeholder="___" maxlength="20">
+
+          <!-- SWITCHES -->
+          <input class="info_product_item create_switches_lubed checkbox hide" type="checkbox" name="lubed" id="lubed">
+
+          <!-- FOR SALE -->
+          <input class="info_product_item checkbox create_for_sale hide" type="checkbox" name="for_sale">
+          <input id="price_tag" class="info_product_item number_input create_price price hide" type="number" max="9999" min="10" step="1.0" name="price" placeholder="___">
+
+      </div>
+      <hr class="add_post_line" style="height: 5rem;transition: height 0.5s ease">
+      <div class="label_product">
+          <p id="p_name_label">Name</p>
+          <p id="p_brand_label">Brand</p>
+          <p id="p_category_label">Category</p>
+          <p id="p_layout_label" class='hide'>Layout</p>
+
+
+          <!-- SWITCHES -->
+          <p id="s_type_label" class='hide'>Type</p>
+          <p id="s_amount_label" class='hide'>Amount</p>
+
+          <!-- KEYCAPS -->
+          <p id="k_material_label" class='hide'>Material</p>
+
+          <p id="p_color_label" class='hide'>Color</p>
+
+          <!-- KEYBOARD -->
+          <p id="p_switches_label" class='hide'>Switches</p>
+          <p id="p_keycaps_label" class='hide'>Keycaps</p>
+          <p id="p_mount_label" class='hide'>Mounting</p>
+
+          <p id="s_lubed_label" class='hide'>Lubed</p>
+
+          <!-- FOR SALE -->
+          <p id='for_sale_add_post' class="for_sale hide">For Sale</p>
+          <p class="price_label hide">Price [USD]</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="add_post_descr" class="move_out">
+  <textarea class="description create_description" maxlength="600" name="description" id="description" rows="2" placeholder="___"></textarea>
+  <button type="submit" id="submit_post"><img class="submit_image" src="{% static 'imgs/arrow_right.png' %}"></button>
+</div>
+
+

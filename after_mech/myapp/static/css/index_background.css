@@ -1,0 +1,38 @@
+.background {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow: hidden;
+      width: max-content; /* auto expands to fit */
+    }
+
+    .row img {
+      width: 400px;   /* bigger covers */
+      height: 300px;
+      object-fit: cover;
+      margin: 2px;
+    }
+
+    .row .set {
+      display: flex;
+    }
+
+    /* Speeds: each row uses same keyframe but different durations */
+    .row-1 { animation: scroll 40s linear infinite; }
+    .row-2 { animation: scroll 60s linear infinite; }
+    .row-3 { animation: scroll 80s linear infinite; }
+    .row-4 { animation: scroll 100s linear infinite; }
+
+    @keyframes scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }

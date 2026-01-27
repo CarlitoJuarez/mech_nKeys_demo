@@ -1,0 +1,50 @@
+
+{% load static %}
+
+{% if last_one %}
+  <div class="messenger_wrapper" id="{{ chat_id }}" data-last-date="{{ last_date|date:'c' }}" data-other-username="{{ other.username }}">
+
+    <label class="profile_picture_stack">
+      {% if other.profile.picture %}
+        <img class="search_profile_picture" src="{{ other.profile.picture.url }}" alt="{{ other.username }}">
+      {% else %}
+        <img src="{% static 'imgs/friends_b.png' %}" alt="default profile_picture">
+      {% endif %}
+    </label>
+
+    <button class="search_profile_btn post_btn" value="{{ other.username }}" href="{% url 'myapp:profile' other.username %}">
+      {{ other.username }}
+    </button>
+
+    <div class="last_one_div {% if last_one and last_one.user_id == request.user.id %}own_message{% endif %}">
+      <p class="last_one_preview last_content">{{ last_one.content }}</p>
+      <p class="last_one_date last_date">{{ last_one.date|timesince }} ago</p>
+    </div>
+
+    <button class="small_btn message_profile_btn" data-chat-id="{{ chat_id }}">
+      <img src="{% static 'imgs/message.png' %}" alt="message">
+      <!-- <span class='badge chat-badge inline_badge'>0</span> -->
+    </button>
+    <span class='badge chat-badge inline_badge'>0</span>
+
+    <button class="mute_chat_btn" data-chat-id="{{ chat_id }}" data-muted-state="{{ muted }}">
+      <img class="mute_icon mute 
+      {% if muted == '0' %}
+        show
+      {% else %}
+        hide
+      {% endif %}
+      " src="{% static 'imgs/mute.png' %}" alt="mute">
+      <img class="mute_icon muted 
+      {% if muted == '1' %}
+        show
+      {% else %}
+        hide
+      {% endif %}
+      " src="{% static 'imgs/mute_filled.png' %}" alt="muted">
+    </button>
+
+  </div>
+
+
+{% endif %}

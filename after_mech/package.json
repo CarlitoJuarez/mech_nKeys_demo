@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@splinetool/runtime": "^1.11.1",
+    "vue": "^3.5.22"
+  }
+}

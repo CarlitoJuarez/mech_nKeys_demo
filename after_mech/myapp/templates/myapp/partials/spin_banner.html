@@ -1,0 +1,198 @@
+{% load static %}
+
+{% block body %}
+
+<div class="banner" id="banner">
+  <div class="track" id="track">
+    <div class="banner-item">
+      <span>Join Discord</span>
+      <button onclick="openInNewTab('https://discord.gg/d3vdhYGh')" ><img src="{% static 'imgs/discord.png' %}" alt="">Join</button>
+    </div>
+    <!-- <div class="banner-item"> -->
+    <!--   <span>Follow on X</span> -->
+    <!--   <button><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="">Follow</button> -->
+    <!-- </div> -->
+    <div class="banner-item">
+      <span>Discover on GitHub</span>
+      <button onclick="openInNewTab('https://github.com/CarlitoJuarez/mech_nKeys.git')"><img src="{% static 'imgs/github.png' %}" alt="">GitHub</button>
+    </div>
+    <!-- <div class="banner-item"> -->
+    <!--   <span>Watch YouTube</span> -->
+    <!--   <button><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="">Watch</button> -->
+    <!-- </div> -->
+    <!-- <div class="banner-item"> -->
+    <!--   <span>Read Blog</span> -->
+    <!--   <button>Go</button> -->
+    <!-- </div> -->
+    <!-- <div class="banner-item"> -->
+    <!--   <span>Get Started</span> -->
+    <!--   <button>Start</button> -->
+    <!-- </div> -->
+  </div>
+</div>
+
+<script>
+
+  function openInNewTab(url) {
+    window.open(url, '_blank', 'noopener,noreferrer');
+    // OR for more control:
+    // window.open(url, '_blank', 'width=800,height=600,noopener,noreferrer');
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('banner');
+    const track  = document.getElementById('track');
+
+    // Duplicate once for seamless loop
+    if (track) track.innerHTML += track.innerHTML
+
+    // ===== Tunables =====
+    let speedPxPerSec    = 140;  // autoplay speed
+    let pauseMs          = 900;  // pause duration
+    let centerTolerance  = 2;    // px window to detect "center hit"
+    let wheelSensitivity = 1.0;  // how strong mouse-wheel nudges are
+    let resumeDelayMs    = 700;  // time after last wheel before autoplay resumes
+    let hysteresisPx     = 8;    // must move at least this far after a pause before next pause can trigger
+    // ====================
+
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) speedPxPerSec = 0;
+
+    // Virtual position (float, sub-pixel smooth)
+    let x = 0;
+    let paused = false;
+    let pauseUntil = 0;
+    let lastWheelAt = 0;
+    let distanceSinceCenter = Infinity; // hysteresis tracker
+    let lastCenterPoint = null;         // which center we paused on last time
+
+    const halfWidth  = () => track.scrollWidth / 2;
+    const viewCenter = () => banner.clientWidth / 2;
+
+
+
+    function getPausePoints() {
+      const children = [...track.children].slice(0, track.children.length / 2);
+      const pts = [];
+      for (const it of children) {
+        const btn = it.querySelector('button');
+        if (!btn) continue;
+        pts.push(btn.offsetLeft + btn.offsetWidth / 2);
+      }
+      return pts;
+    }
+    let pausePoints = getPausePoints();
+
+    function render() {
+      const hw = halfWidth();
+      const mod = ((x % hw) + hw) % hw;
+      track.style.transform = `translate3d(${-mod}px,0,0)`;
+    }
+
+    function wrapAndMaybeRecalc() {
+      const hw = halfWidth();
+      // keep x in [0, hw)
+      if (x >= hw) {
+        x -= hw;
+        pausePoints = getPausePoints(); // content widths may have changed slightly
+      } else if (x < 0) {
+        x += hw;
+      }
+    }
+
+    // Snap exactly so the chosen pause point is in the middle of the window
+    function snapToCenter(targetPoint) {
+      const hw = halfWidth();
+      const mod = ((x % hw) + hw) % hw;
+      const currentCenterX = mod + viewCenter();
+      const delta = targetPoint - currentCenterX;
+      x += delta;
+      wrapAndMaybeRecalc();
+      render();
+      lastCenterPoint = targetPoint;
+      distanceSinceCenter = 0; // reset hysteresis
+    }
+
+    // Autoplay loop (delta time, with exact pause)
+    let lastT = performance.now();
+    function raf(now) {
+      const dt = (now - lastT) / 1000;
+      lastT = now;
+
+      // Resume from pause time
+      if (paused && now >= pauseUntil) {
+        paused = false;
+        // reset clock so no first-frame jump after pause
+        lastT = performance.now();
+      }
+
+      // Advance if not paused and user isn't actively wheeling
+      const userActive = (now - lastWheelAt) < resumeDelayMs;
+      if (!paused && !userActive && speedPxPerSec > 0) {
+        const dx = speedPxPerSec * dt;
+        x += dx;
+        distanceSinceCenter += Math.abs(dx);
+        wrapAndMaybeRecalc();
+        render();
+      }
+
+      // Decide to pause: only if we've moved far enough since last pause (hysteresis)
+      if (!paused && !userActive && speedPxPerSec > 0 && distanceSinceCenter >= hysteresisPx) {
+        const hw = halfWidth();
+        const mod = ((x % hw) + hw) % hw;
+        const centerX = mod + viewCenter();
+        const tol = Math.max(centerTolerance, speedPxPerSec * dt);
+
+        // Find the pause point within tolerance (if any)
+        for (const p of pausePoints) {
+          // Optional: skip if it's the same point we just paused on and we haven't wrapped yet
+          if (lastCenterPoint !== null && Math.abs(p - lastCenterPoint) < 0.5 && distanceSinceCenter < hw * 0.25) continue;
+
+          if (Math.abs(p - centerX) <= tol) {
+            // 1) Snap EXACTLY to center (eliminates the 1px twitch)
+            snapToCenter(p);
+            // 2) Enter paused state
+            paused = true;
+            pauseUntil = now + pauseMs;
+            break;
+          }
+        }
+      }
+
+      requestAnimationFrame(raf);
+    }
+
+    // Wheel support: let users nudge left/right while hovering
+    banner.addEventListener('wheel', (e) => {
+      e.preventDefault(); // keep page from scrolling
+      const dx = (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY);
+      x += dx * wheelSensitivity;
+      lastWheelAt = performance.now();
+      distanceSinceCenter += Math.abs(dx * wheelSensitivity);
+      wrapAndMaybeRecalc();
+      render();
+    }, { passive: false });
+
+    // Recompute on load/resize (fonts/icons may shift widths)
+    const recompute = () => { pausePoints = getPausePoints(); render(); };
+    window.addEventListener('load', recompute);
+    window.addEventListener('resize', () => { setTimeout(recompute, 100); });
+
+    // Start
+    render();
+    requestAnimationFrame(raf);
+
+
+  });
+</script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+@use '../variables' as *;
+
+#spline_object {
+  position: absolute;
+  margin-top: 25vh;
+  z-index: 400;
+  opacity: 0;
+  transition: opacity .8s ease;
+}
+
+.vue_app_div {
+  font-family: $font-secondary !important;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 4rem 0;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+

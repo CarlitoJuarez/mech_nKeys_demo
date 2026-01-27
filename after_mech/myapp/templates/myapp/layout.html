@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>mech_nKeys</title>
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% if user.is_authenticated %}
+      <script type="module" src="{% static 'js/session.js' %}"></script>
+      <script type="module" src="{% static 'js/ws_connect.js' %}"></script>
+      <script type="module" src="{% static 'js/home/header.js' %}"></script>
+    {% endif %}
+    <script type="module" src="{% static 'js/global_header.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block head %}
+    {% endblock %}
+  </head>
+  <body id='body'>
+    <nav id="feed_bar">
+      {% if user.is_authenticated %}
+        <a id="keyboard_header" class="header" data-url="{% url 'myapp:home' %}"><div class="nav_swap keyboard_swap" id="keyboard_swap"></div><img id='keyboard_img' src="{% static 'imgs/home_w.png' %}"></a>
+        <a id="market_header" class="header" data-url="{% url 'myapp:market' %}"><div class="nav_swap market_swap" id="market_swap"></div><img id='market_img' src="{% static 'imgs/market_w.png' %}"></a>
+      {% endif %}
+      <div id='logo_div' class='{% if user.is_authenticated %}add_post_btn{% else %}home_btn{% endif %}' data-url="{% url 'myapp:home' %}">
+        <img src="{% static 'imgs/logo.png' %}">
+      </div>
+    </nav>
+    <div id='error_div' class='error_div {% if errors %}show make_visible{% else %}hide{% endif %}'>
+      {% for error in errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+    {% include 'myapp/partials/loading.html' %}
+    {% include 'myapp/partials/spin_banner.html' %}
+
+    <!-- BOTTOM -->
+    <nav id="nav">
+      <!--<a href="{% if user.is_authenticated %}-->
+      <!--         {% url 'myapp:home' %} {% else %}-->
+      <!--         {% url 'myapp:index' %} {% endif %}"><img src="{% static 'imgs/home_w.png' %}">-->
+      <!--</a>-->
+      {% if user.is_authenticated %}
+        <a class="user_profile_btn" href="{% url 'myapp:profile' user_name %}">
+          <img src="{% static 'imgs/user_w.png' %}">
+          <span class="user_badge badge" hidden>0</span>
+        </a>
+      {% else %}
+        <a href="{% url 'myapp:index' %}"><img src="{% static 'imgs/home_w.png' %}"></a>
+      {% endif %}
+
+      <div id="nav_bar">
+        <a href="{% url 'myapp:about' %}">About</a>
+        <a href="{% url 'myapp:help' %}">Help</a>
+        <a href="{% url 'myapp:privacy' %}">Privacy Policy</a>
+        <a href="{% url 'myapp:imprint' %}">Imprint</a>
+        <a href="{% url 'myapp:terms' %}">Terms & Conditions</a>
+        <a href="{% url 'myapp:guidelines' %}">Community Guidelines</a>
+        <a href="{% url 'myapp:copyright' %}">Copyright</a>
+      </div>
+
+      {% if user.is_authenticated %}
+        <form id='logout' method="post" action="{% url 'myapp:logout' %}">
+          {% csrf_token %}
+          <button type="submit">
+            <img src="{% static 'imgs/logout.png' %}" alt="Logout">
+          </button>
+        </form>
+      {% endif %}
+
+    </nav>
+    {% block body %}
+    {% endblock %}
+  </body>
+</html>

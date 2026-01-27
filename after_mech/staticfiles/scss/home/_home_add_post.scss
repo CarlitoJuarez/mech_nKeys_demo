@@ -1,0 +1,379 @@
+@use '../variables' as *;
+
+//  1. ADD POST IMG
+
+#img_wrapper {
+  z-index: 3;
+  top: 15vh;
+  position: fixed;
+  left: -80vw;
+  width: 60vw;
+  height: 55vh;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  // transition: transform 0.5s ease;
+  transition: left 0.5s ease;
+  opacity: 0;
+  // transition: opacity .2s ease;
+
+
+  border-radius: 10px;
+  border: .5px solid $lightGray;
+  // background-color: $background_3;
+  background-color: rgba(240, 240, 240, .2);
+  backdrop-filter: blur(10px);
+}
+
+#add_post_img {
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  max-width: 100vh;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img {
+  border-radius: 8px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+#img_wrapper.move_in {
+  opacity: 1;
+  // transform: translateX(72vw);
+  left: 10vw;
+}
+
+#img_wrapper.move_out {
+  left: -80vw;
+  opacity: 0;
+}
+
+.prev_button {
+  display: none;
+  position: absolute;
+  left: .5rem;
+  width: 40%;
+  height: 60%;
+  background: transparent; 
+  border: none;
+  z-index: 2;
+}
+
+.next_button {
+  z-index: 1;
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  right: .5rem;
+  width: 30%;
+  height: 60%;
+  background: transparent; 
+  border: none;
+}
+
+#add_post_next_img {
+  position: absolute;
+  right: .5rem;
+}
+
+#add_img_btn {
+}
+
+.img_warning {
+  z-index: 3;
+  position: absolute;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(240, 240, 240, .8);
+  backdrop-filter: blur(10);
+  color: red;
+
+}
+
+#add_post_bin {
+  z-index: 3;
+  display: block;
+  position: fixed;
+  bottom: 2vh;
+  right: 1rem;
+  width: 20px;
+  border-radius: 4px;
+  background: rgba(196, 196, 196, 0.419);
+  backdrop-filter: blur(20px);
+  &:hover {
+      background: #dadada75;
+  }
+}
+
+#slide_show {
+  border-radius: 8px;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+
+//  2. ADD POST INFO
+
+#info_wrapper {
+  top:15vh;
+  position: fixed;
+  right: -80vw;
+  width: 19vw;
+  height: 55vh;
+  background: transparent;
+  opacity: 0;
+  // transition: transform 0.5s ease;
+  transition: right 0.5s ease;
+  // transition: opacity 0.1s ease;
+  z-index: 1;
+
+  display: flex;
+}
+
+#add_post_info {
+  z-index: 3;
+  position: relative;
+  border-radius: 10px;
+  border: solid .4px #888;
+  width: 100%;
+  max-width: 60vh;
+  height: 100%;
+  background: $background_nav_1;
+  backdrop-filter: blur(20px);
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+}
+
+#info_wrapper.move_in {
+  right: 9vw;
+  opacity: 1;
+}
+
+#info_wrapper.move_out {
+  right: -80vw;
+  opacity: 0;
+}
+
+.info_table {
+  position: relative;
+  height: 65%;
+  width: 100%;
+  display: flex;
+  line-height: 1;
+  font-size: 16px;
+  margin-top: 1rem;
+}
+
+.add_post_line {
+  margin: 0 3%;
+  transition: height .4s ease;
+}
+
+.info_product {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  margin-top: 0;
+  margin-right: 0;
+}
+
+.label_product {
+  width: 50%;
+  height: 100%;
+  margin-right: 0;
+  line-height: 130%;
+  font-size: 16px;
+  > p {
+    margin-top: 0;
+    margin-bottom: 1em;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  >:last-child {
+    margin-top: -2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+#p_category {
+  border-radius: 8px;
+}
+
+.for_sale {
+  padding-top: 1.5rem;
+}
+
+#for_sale_add_post { // for add_post
+  padding-bottom: 2rem !important;
+}
+
+.info_product_item {
+  height: 20.8px;
+  width: 90%;
+  max-width: 6rem;
+  display: block;
+  margin-top: 0;
+  margin-bottom: 1em;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding-right: 8px;
+  text-align: right;
+  margin-left: auto;
+  font-family: $font-primary;
+  transition: border .8s ease;
+  transition: opacity .2s ease;
+}
+
+
+.checkbox {
+  // float: right;
+  margin-right: .2rem;
+  width: 16px;
+  margin-top: 5px;
+}
+
+.number_input {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  -moz-appearance: textfield;
+}
+
+#price_tag {
+  margin-right: 0;
+  padding-right: 0;
+}
+
+
+input,textarea,select {
+  font-size: 16px;
+  outline-width: 0;
+  border: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  font-size: 16px;
+}
+
+.select_item {
+  margin-top: .50rem;
+}
+
+
+#clear_div {
+  margin-top: .8rem;
+  height: 2.4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+//  3. ADD POST DECRIPTION
+
+#add_post_descr {
+  z-index: 3;
+  position: fixed;
+  border-radius: 10px;
+  bottom: -22vh;
+  right: 10vw;
+  width: 80vw;
+  height: 20vh;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease;
+}
+
+#add_post_descr.move_in {
+  transform: translateY(-30vh);
+}
+
+#add_post_descr.move_out {
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.description {
+  font-family: $font-primary;
+  background: transparent;
+  resize: none;
+  padding: 14px;
+}
+
+#description {
+  width: 90%;
+  height: 17vh;
+  border-radius: 6px;
+  margin-right: .5rem;
+  border: solid .4px #888;
+  padding: 14px;
+  background: $background_nav_1;
+  backdrop-filter: blur(20px);
+}
+
+
+//  4. SUBMIT POST
+
+#submit_post {
+  right: 2.5rem;
+  background: linear-gradient(160deg, $midligthBlue, $lightBlue);
+  height: 84%;
+  width: 6vh;
+  display: flex;
+  border-radius: 6px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transform-origin: bottom left;
+  transition: transform .5s ease;
+  &:hover{
+    background: linear-gradient(-20deg, $midligthBlue, $lightBlue);
+  }
+  &:before {
+      position: relative;
+      content: '';
+      display: inline-block;
+      top: -180px;
+      left: 0;
+      width: .8rem;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 1);
+      animation: shiny_btn 5s ease-in-out infinite;
+  }
+}
+
+.submit_image {
+    position: relative;
+    width: 5vh;
+    height: 40%;
+    left: -.4rem;
+}
+

@@ -1,0 +1,159 @@
+{% extends "myapp/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<script type="module" src="{% static 'js/index/display_form.js' %}"></script>
+<script type="module" src="{% static 'js/index/submit_form.js' %}"></script>
+<script type="module" src="{% static 'js/index/viewport_index.js' %}"></script>
+<script type="module" src="{% static 'js/index/index.js' %}"></script>
+
+<link rel="stylesheet" href="{% static 'css/index_background.css' %}">
+
+ <div class="background">
+    <div class="row row-1">
+      <div class="set">
+        <img loading="lazy" src="{% static 'background_imgs/key_1.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_2.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_3.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_4.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_5.jpeg' %}" alt="">
+      </div>
+      <div class="set">
+        <img loading="lazy" src="{% static 'background_imgs/key_6.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_7.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_8.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_9.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_10.jpeg' %}" alt="">
+      </div>
+      <div class="set">
+        <img loading="lazy" src="{% static 'background_imgs/key_1.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_2.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_3.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_4.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_5.jpeg' %}" alt="">
+      </div>
+      <div class="set">
+        <img loading="lazy" src="{% static 'background_imgs/key_6.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_7.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_8.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_9.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_10.jpeg' %}" alt="">
+      </div>
+    </div>
+
+    <div class="row row-2">
+      <div class="set">
+        <img loading="lazy" src="{% static 'background_imgs/key_11.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_12.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_13.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_14.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_15.jpeg' %}" alt="">
+      </div>
+      <div class="set">
+        <img loading="lazy" src="{% static 'background_imgs/key_16.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_17.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_18.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_19.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_20.jpeg' %}" alt="">
+      </div>
+      <div class="set">
+        <img loading="lazy" src="{% static 'background_imgs/key_11.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_12.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_13.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_14.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_15.jpeg' %}" alt="">
+      </div>
+      <div class="set">
+        <img loading="lazy" src="{% static 'background_imgs/key_16.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_17.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_18.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_19.jpeg' %}" alt="">
+        <img loading="lazy" src="{% static 'background_imgs/key_20.jpeg' %}" alt="">
+      </div>
+    </div>
+  </div>
+
+
+<div id="index_body">
+
+  <div id="index_buttons" class="show">
+    <button id="login_btn" class="btn index_btn show">Login</button>
+    <button id="register_btn" class="btn index_btn show">Register</button>
+  </div>
+
+  <div id='form_div'>
+    <div id="index_logo">
+      <img src="{% static 'imgs/logo_no_back_b.png' %}">
+    </div>
+    <form id="index_login_form" class="form index_form hide" method="post" action="{% url 'myapp:index' %}">
+      {% csrf_token %}
+      <input type="hidden" name="form_type" value="login">
+      <input type="hidden" name="consent" value="False">
+      {{ login_form.username }}
+      {{ login_form.password }}
+      <div class="index_switch">
+        <p>New to mech_nKeys?</p>
+        <p class="switchy_bitchy to_register">Sign up now.</p>
+        <p class="forgot_password">Forgot your password?</p>
+      </div>
+      <button id="login_submit" class="btn show" type="submit">Login</button>
+      <button id="send_verification_link_btn" class="btn hide" type="button">Send Link</button>
+    </form>
+
+    <form id="index_terms_and_conditions" class="form index_form hide">
+      {% include 'myapp/partials/terms_and_conditions.html' %}
+      <p class="switchy_bitchy" style='font-size: 14px;'>By using this website, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.</p>
+      <button class="btn">confirm</button>
+    </form>
+ 
+    <form id="index_register_form" class="form index_form hide" method="post" action="{% url 'myapp:index' %}">
+      {% csrf_token %}
+      <input type="hidden" name="form_type" value="register">
+      {{ register_form.username }}
+      {{ register_form.password1 }}
+      {{ register_form.password2 }}
+      {{ register_form.email }}
+      <div class="index_switch">
+        <p class="">Already have an accout?</p>
+        <p class="switchy_bitchy to_login">Sign in now.</p>
+        <p class="forgot_password">Forgot your password?</p>
+      </div>
+      <button id="register_submit" class="btn" type="submit">Register</button>
+    </form>
+
+    <!-- PASSWORD RESET -->
+    <form id="index_password_form" class="form index_form hide" method="post" action="{% url 'myapp:index' %}">
+      {% csrf_token %}
+      <p style="font-size:16px;line-height:1.5;">To reset your password, <br> enter your email.</p>
+      <input type="hidden" name="form_type" value="reset_password">
+      {{ password_form.email }}
+      <div class="index_switch">
+        <p>or</p>
+        <p class="switchy_bitchy to_login">Sign in now. / </p>
+        <p class="switchy_bitchy to_register">Sign up now.</p>
+      </div>
+      <button id="reset_password" class="btn" type="submit">Reset Password</button>
+    </form>
+
+    {# PASSWORD RESET CONFIRM (uid/token) #}
+    {% if form %}
+      {% if validlink %}
+      <form id="password_reset_form" class="form index_form show" method="post" action="{{ request.pasth }}">
+          {% csrf_token %}
+          {{ form.new_password1 }}
+          {{ form.new_password2 }}
+          <button class="btn" type="submit">Set new password</button>
+        </form>
+      {% else %}
+        <div id="password_reset_form" class="form index_form show">
+          <p>Reset link expired or invalid.</p>
+          <a class="btn" href="/?password_reset=1">Request a new reset link</a>
+        </div>
+      {% endif %}
+    {% endif %}
+    <!-- END PASSWORD RESET -->
+
+  </div>
+</div>
+{% endblock %}

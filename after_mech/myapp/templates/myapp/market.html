@@ -1,0 +1,127 @@
+{% extends "myapp/layout.html" %}
+{% load static %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'css/market.css' %}">
+<script type="module" src="{% static 'js/home/header.js' %}"></script>
+<script type="module" src="{% static 'js/home/post.js' %}"></script>
+<script type="module" src="{% static 'js/home/search_market.js' %}"></script>
+<script type="module" src="{% static 'js/home/market.js' %}"></script>
+<script type="module" src="{% static 'js/home/add_post.js' %}"></script>
+
+<meta name="user_name" content="{{ user_name }}">
+<meta name="is_market" content=true>
+{% include "myapp/partials/post_head.html" %}
+
+{% endblock %}
+
+{% block body %}
+
+<button type="button" id="exit_btn" class="small_btn hide">
+  <img id="add_post_btn_img" src="{% static 'imgs/plus.png' %}">
+</button>
+
+{% include 'myapp/add_post.html' %}
+
+<div id='search_div'>
+  <div id='search_info'>
+  </div>
+  <div id='search_input' class='closed'>
+    <div id='product_div' class='search_label'>
+      <input id="search_product" class='hide' type="text" name="search_product" placeholder="by Product" maxlength="13">
+      <label id='product_label'>
+        <img src="{% static 'imgs/product_label_img.png' %}">
+      </label>
+    </div>
+    <div id='brand_div' class='search_label'>
+      <input id='search_brand' class='hide' type="text" name="search_brand" placeholder="by Brand" maxlength="13">
+      <label id='brand_label'>
+        <img src="{% static 'imgs/market_w.png' %}">
+      </label>
+    </div>
+    <div id='category_div' class='search_label'>
+      <select id="search_category" class='hide' name="search_category">
+          <option selected value="None"></option>
+          {% for value, label in categories %}
+              <option class="search_category_option" value="{{ value }}">{{ label }}</option>
+          {% endfor %}
+      </select>
+      <label id='category_label'>
+        <img src="{% static 'imgs/category_label_img.png' %}">
+      </label>
+    </div>
+    <div id='layout_div' class='filter category_specific_div search_label hide'>
+      <select id="search_layout" class='search_category_specific hide' name="search_layout">
+          <option selected value="None"></option>
+          {% for label, value in layouts %}
+              <option class="search_layout_option" value="{{ value }}">{{ label }}</option>
+          {% endfor %}
+      </select>
+      <label id='layout_label' class='category_specific_label'>
+        <img src="{% static 'imgs/layout_label_img.png' %}">
+      </label>
+    </div>
+    <div id='s_type_div' class='filter category_specific_div search_label hide'>
+      <select id="search_s_type" class='search_category_specific hide' name="search_s_type">
+          <option selected value="None"></option>
+          {% for label, value in switch_type %}
+              <option class="search_s_type_option" value="{{ value }}">{{ label }}</option>
+          {% endfor %}
+      </select>
+      <label id='s_type_label' class="category_specific_label">
+        <img src="{% static 'imgs/switch_w.png' %}">
+      </label>
+    </div>
+    <div id='cap_material_div' class='filter category_specific_div search_label hide'>
+      <select id="search_cap_material" class='search_category_specific hide' name="search_cap_material">
+          <option selected value="None"></option>
+          {% for label, value in cap_material %}
+              <option class="search_cap_material_option" value="{{ value }}">{{ label }}</option>
+          {% endfor %}
+      </select>
+      <label id='cap_material_label' class="category_specific_label">
+        <img src="{% static 'imgs/caps_w.png' %}">
+      </label>
+    </div>
+  </div>
+</div>
+
+<div id="keyboard_div">
+  {% for post in posts %}
+    {% include "myapp/partials/post_body.html" with post=post %}
+  {% endfor %}
+  <div id='loading' class='spinner'>
+    <span class='dot dot1'></span>
+    <span class='dot dot2'></span>
+    <span class='dot dot3'></span>
+  </div>
+</div>
+
+
+<svg width="0" height="0" style="position:absolute;">
+  <defs>
+    <clipPath id="gofuckyourself" clipPathUnits="objectBoundingBox">
+      <path d="
+        M 0.00 0.00
+
+        H 1.00
+
+        C 1.00 0.015, 0.98 0.03, 0.98 0.05
+        L 0.98 0.88
+
+        C 0.98 0.94, 0.96 1.00, 0.90 1.00
+        H 0.10
+        C 0.04 1.00, 0.02 0.94, 0.02 0.88
+
+        L 0.02 0.05
+        C 0.02 0.03, 0.00 0.015, 0.00 0.00 
+
+        Z
+      "/>
+    </clipPath>
+  </defs>
+</svg>
+
+
+{% endblock %}

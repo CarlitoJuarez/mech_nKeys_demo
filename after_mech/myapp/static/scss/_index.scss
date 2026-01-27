@@ -1,0 +1,150 @@
+@use 'variables' as *;
+
+#index_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.5s ease;
+  height: 100vh;
+  width: 100vw;
+  justify-content: start;
+  position: relative;
+}
+
+#index_buttons {
+  position: absolute;
+  z-index: 20;
+  top: 50vh;
+  transition: opacity 0.5s ease;
+}
+
+#form_div {
+  position: relative;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+  align-items: center;
+  justify-content: start;
+  padding-bottom: 3rem;
+}
+
+#index_logo {
+  position: relative;
+  margin-top: 14vh;
+  height: 28vh;
+  width: 14rem;
+  min-width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $background_2;
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  > img {
+    height: 90%;
+  }
+}
+
+#index_logo.add_form {
+  transition: all 0.5s ease;
+  height: 18vh;
+}
+
+
+.index_form {
+  position: relative;
+  margin-top: .8rem;
+  margin-bottom: 20vh;
+  padding: 0 1rem;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  align-items: center;
+  width: 14rem;
+  > input {
+    // color: $white;
+    padding: .4rem;
+    border-radius: 4px;
+    width: 10rem;
+    height: 1.6rem;
+    background: $background_3;
+  }
+  >input::placeholder {
+    color: $background_dark;
+  }
+  > *{
+    margin-top: 1.2rem;
+  }
+}
+
+.center {
+  top: unset;
+}
+
+.show {
+  display: flex !important;
+}
+
+.index_btn.centered {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.index_switch {
+  font-size: 14px;
+  height: fit-content;
+  > p {
+    line-height: 1;
+    align-items: end;
+    justify-content: end;
+  }
+  > &:last-child {
+    font-size: 12px;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.switchy_bitchy {
+  font-weight: 600;
+
+}
+
+#error_div {
+  background: rgba(220, 220, 220, .9);
+  flex-direction: column;
+  opacity: 0;
+  border-radius: 3px;
+  font-size: 11px;
+  z-index: 10;
+  position: absolute;
+  padding: 10px;
+  top: 4rem;
+  align-items: center;
+  justify-content: center;
+    > p {
+      color: red;
+    }
+}
+
+
+#terms_and_conditions {
+  font-size: 14px;
+  max-width: 20rem;
+  > h1 {
+    font-size: 20px;
+  }
+  > h2 {
+    font-size: 16px;
+  }
+}
+
+

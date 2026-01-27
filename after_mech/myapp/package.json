@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@splinetool/runtime": "^0.9.526"
+  },
+  "devDependencies": {
+    "sass": "^1.97.2"
+  }
+}

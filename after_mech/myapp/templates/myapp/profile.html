@@ -1,0 +1,158 @@
+{% extends "myapp/layout.html" %}
+{% load static %}
+{% block body %}
+
+<head>
+  <meta name="profile_name" content="{{ profile_name }}">
+  <meta name="profile_id" content="{{ profile.id }}">
+  <meta name="unfollow_img" content="{% static 'imgs/unfollow_w.png' %}">
+  <meta name="follow_img" content="{% static 'imgs/follow_w.png' %}">
+  <meta name="is_follow" content="{{ is_following }}">
+  <meta name="chat_id" content="{{ chat_id }}">
+  <meta name="user_name" content="{{ user_name }}">
+  <meta name="profile_picture_url" content="{{ profile.picture }}">
+
+  <script type="module" src="{% static 'js/profile/profile.js' %}"></script> 
+  <script type="module" src="{% static 'js/home/post.js' %}"></script>
+  <script type="module" src="{% static 'js/home/header.js' %}"></script>
+  <script type="module" src="{% static 'js/home/add_post.js' %}"></script>
+  <script type="module" src="{% static 'js/home/profile_btn.js' %}"></script>
+
+  {% include "myapp/partials/post_head.html" %}
+
+</head>
+
+<button type="button" id="exit_btn" class="small_btn hide">
+    <img id="add_post_btn_img" src="{% static 'imgs/plus.png' %}">
+</button>
+
+
+{% include 'myapp/add_post.html' %}
+
+<div id='profile_chat' class='inactive_board' data-chat-id="0">
+  <div class="chat_wrapper">
+    <div class="chat_area chat_center">
+        <textarea id="chat_input{{post.id}}" class="chat_input" maxlength="600" placeholder="_ _ _"></textarea>
+        <label id="submit_chat{{post.id}}" class="submit_chat"><img class="submit_chat_img" src="{% static 'imgs/arrow_right.png' %}"></label>
+    </div>
+    <div class="chat_section_2" id="chat_section_2{{ post.id }}">
+      {% if messages.first == none %}
+        <p style="text-align: center;">No chats.</p>
+      {% else %}
+      {% for message in messages %}
+        <div class="chat_elem {% if message.user == request.user %}own_message{% endif %}">
+          <p class="chat_content">{{ message.content }}</p>
+          {% if message.is_today %}
+            <p class="chat_date">{{ message.date|time:"H:i" }}</p>
+          {% else %}
+            <p class="chat_date">{{ message.date|date:"M d, Y" }}</p>
+          {% endif %}
+        </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div id='profile_div'>
+  <div id='profile_info'>
+    <div id='profile_follower'>
+      <img id='follower_img' src="{% static 'imgs/friends.png' %}">
+      <p>{{ follower_count }}</p>
+    </div>
+    <div id='profile_following'>
+      <img id='follower_img' src="{% static 'imgs/following_w.png' %}">
+      <p>{{ following_count }}</p>
+    </div>
+    <div id='profile_membership'>
+      <p>{{ date_joined|date:"d-m-Y" }}</p>
+    </div>
+  </div>
+  <div id='border_wrapper'>
+    <div id='profile_name'{% if is_following %} class='border_gradient' {% endif %}>
+      <p id='profile_username'> {{ profile.user.username }} </p>
+      {% if request.user.id != profile.user.id %}
+        <label id='profile_follow_label'>
+          {% if is_following %}
+            <img id='profile_follow_img' src="{% static 'imgs/unfollow_w.png' %}">
+          {% else %}
+            <img id='profile_follow_img' src="{% static 'imgs/follow_w.png' %}">
+          {% endif %}
+        </label>
+        <label id='profile_msg_label'>
+          <img id='profile_msg_img' src="{% static 'imgs/message.png' %}">
+        </label>
+      {% else %}
+        <label id='profile_settings_label'>
+            <img id='profile_settings_img' src="{% static 'imgs/settings_w.png' %}">
+        </label>
+        <label id='profile_messenger_label'>
+            <img id='profile_messenger_img' src="{% static 'imgs/chat_w.png' %}">
+            <span id='messenger_badge' class='badge' hidden>0</span>
+        </label>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+{% if request.user == profile.user %}
+<div id="messenger_div" class="inactive_board">
+  {% for chat_info in chat_arr_info %}
+    {% include 'myapp/partials/profile_messenger.html' with chat_id=chat_info.chat_id other=chat_info.other last_one=chat_info.last_one last_date=chat_info.last_date muted=chat_info.muted%}
+  {% endfor %}
+</div>
+{% endif %}
+
+<div id="follower_div" class="profiles_board inactive_board">
+  {% for profile in follower %}
+  {% include 'myapp/partials/profile_card.html' with profile=profile %}
+  {% endfor %}
+</div>
+<div id="following_div" class="profiles_board inactive_board">
+  {% for follow in following %}
+  {% include 'myapp/partials/profile_card.html' with profile=follow %}
+  {% endfor %}
+</div>
+
+<div id="keyboard_div">
+  {% for post in posts %}
+    {% include 'myapp/partials/post_body.html' with post=post %}
+  {% endfor %}
+  <div id='loading' class='spinner'>
+    <span class='dot dot1'></span>
+    <span class='dot dot2'></span>
+    <span class='dot dot3'></span>
+  </div>
+</div>
+
+
+<svg width="0" height="0" style="position:absolute;">
+  <defs>
+    <clipPath id="gofuckyourself" clipPathUnits="objectBoundingBox">
+      <path d="
+        M 0.00 0.00
+
+        H 1.00
+
+        C 1.00 0.015, 0.98 0.03, 0.98 0.05
+        L 0.98 0.88
+
+        C 0.98 0.94, 0.96 1.00, 0.90 1.00
+        H 0.10
+        C 0.04 1.00, 0.02 0.94, 0.02 0.88
+
+        L 0.02 0.05
+        C 0.02 0.03, 0.00 0.015, 0.00 0.00 
+
+        Z
+      "/>
+    </clipPath>
+  </defs>
+</svg>
+
+
+
+{% endblock %}
+
+

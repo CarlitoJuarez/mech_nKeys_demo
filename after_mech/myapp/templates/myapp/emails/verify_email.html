@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <body>
+    <p>Hi {{ user.username }},</p>
+    <p>Please verify your email to activate your account.</p>
+    <p>
+      <a href="{{ verify_url }}"
+         style="display:inline-block;padding:12px 18px;border-radius:6px;background:#2563eb;color:#fff;text-decoration:none;">
+        Verify email
+      </a>
+    </p>
+    <p>If the button doesn't work, open this link:</p>
+    <p>{{ verify_url }}</p>
+  </body>
+</html>
