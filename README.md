@@ -3,8 +3,7 @@
 This is the demo version of the mech_nKeys website.
 =======
 ### INSTRUCTIONS FOR DEMO
-    cp .env.example .env
-    python manage.py migrate
-    python manage.py seed
-    python manage.py runserver
+ cp after_mech/.env.example after_mech/.env
+./scripts/dev.sh
+# open http://127.0.0.1:8000
 >>>>>>> 85b49d6 (Initial demo repo)
