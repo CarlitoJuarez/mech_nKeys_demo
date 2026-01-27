@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # mech_nKeys_demo
 This is the demo version of the mech_nKeys website.
 =======
