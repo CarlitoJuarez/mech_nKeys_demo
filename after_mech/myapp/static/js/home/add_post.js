@@ -809,7 +809,9 @@ export function add_post_field () {
       const is_own = user_name == profile_name ? true : false;
 
       const html = data?.html || '';
-      if (html && !typeof searchMode === 'function' && searchMode() && (!is_market && (!profile_name || profile_name && is_own))) {
+
+      if (html && ((!typeof searchMode === 'function' && !searchMode()) || !typeof searchMode !== 'function') && (!is_market && (!profile_name || profile_name && is_own) )) {
+
         // add new post to DOM
 
         let all_posts = document.querySelectorAll('.post_wrapper');
