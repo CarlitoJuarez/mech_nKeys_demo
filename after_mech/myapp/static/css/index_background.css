@@ -12,18 +12,16 @@
       display: flex;
       flex-wrap: nowrap;
       overflow: hidden;
-      width: max-content; /* auto expands to fit */
-    }
-
-    .row img {
-      width: 400px;   /* bigger covers */
       height: 300px;
-      object-fit: cover;
-      margin: 2px;
+      width: 200%;
     }
 
-    .row .set {
-      display: flex;
+    .row-1 {
+      background: url("/static/background_imgs/row1.webp") repeat-x;
+    }
+
+    .row-2 {
+      background: url("/static/background_imgs/row2.webp") repeat-x;
     }
 
     /* Speeds: each row uses same keyframe but different durations */
@@ -33,6 +31,6 @@
     .row-4 { animation: scroll 100s linear infinite; }
 
     @keyframes scroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
