@@ -14,11 +14,16 @@ export const hide_smth = function(el, time) {
   else
     el.style.transition = `opacity .2s ease`;
   el.style.opacity = '0';
-  el.classList.remove('show');
   if (time) {
-    setTimeout(() => el.classList.add('hide'), time);
+    setTimeout(() => {
+      el.classList.remove('show'),
+      el.classList.add('hide')
+      }, time);
   } else {
-    setTimeout(() => el.classList.add('hide'), 200);
+    setTimeout(() => {
+      el.classList.remove('show')
+      el.classList.add('hide')
+    }, 200);
   }
 };
 

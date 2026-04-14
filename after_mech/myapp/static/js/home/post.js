@@ -1050,7 +1050,7 @@ function bindStamp(postWrapper) {
     }
 
     hide_smth(edit_descr);
-    show_smth(descr);
+    show_smth(descr, 220);
 
 
   // SAVE DATA & SWITCH NO NORMAL
@@ -1490,11 +1490,8 @@ function bindStamp(postWrapper) {
           }
         });
 
-        descr.classList.remove('show');
-        descr.classList.add('hide');
-
-        edit_descr.classList.remove('hide');
-        edit_descr.classList.add('show');
+        hide_smth(descr);
+        show_smth(edit_descr, 220);
 
       // END EDIT MODE
       } else {
